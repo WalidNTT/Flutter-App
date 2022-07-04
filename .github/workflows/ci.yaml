@@ -1,0 +1,33 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # run jobs to test and build the android and ios app
+jobs:
+  # run linting and unit test
+  flutter_test:
+    name: Run flutter test and analyze
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello World"
+
+  # build android app
+  build_appbundle:
+    name: Build Flutter (Android)
+    runs-on: ubuntu-latest
+    steps:
+      - name: say hello
+        run: echo "Hello World"
+  
+  # build ios app
+  build_ios:
+    name: Build flutter (iOS)
+    runs-on: macos-latest
+    steps:
+      - name: say hello
+        run: echo "Hello World"
