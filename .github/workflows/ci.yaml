@@ -46,6 +46,7 @@ jobs:
   Code_quality:
     name: Dart-code-metrics-actions
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.os == 'ubuntu-latest' && 'docker/image' || null }}
     needs: setup
 
     strategy:
