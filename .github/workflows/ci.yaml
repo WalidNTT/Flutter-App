@@ -38,7 +38,7 @@ jobs:
         with:
           channel: 'stable'
           flutter_version: ${{ env.flutter_version }}
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         run: flutter pub get
       - name: Lint
         run: flutter format --dry-run . --set-exit-if-changed
