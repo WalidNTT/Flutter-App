@@ -43,7 +43,7 @@ jobs:
       - name: Lint
         run: flutter format --dry-run . --set-exit-if-changed
 
-  Code_quality:
+  #Code_quality:
     # name: Run flutter test and analyze
     # runs-on: ${{ matrix.os }}
     # needs: setup
