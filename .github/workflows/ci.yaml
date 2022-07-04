@@ -43,47 +43,51 @@ jobs:
       - name: Lint
         run: flutter format --dry-run . --set-exit-if-changed
 
-  #Code_quality:
-    # name: Run flutter test and analyze
-    # runs-on: ${{ matrix.os }}
-    # needs: setup
+  Code_quality:
+    name: Dart-code-metrics-actions
+    runs-on: ${{ matrix.os }}
+    needs: setup
 
-    # strategy:
-    #   matrix:
-    #     os: [ubuntu-latest, macos-latest]
-    #     include:
-    #       - os: ubuntu-latest
-    #         flutter_path: /opt/hostedtoolcache/flutter
-    #       - os: macos-latest
-    #         flutter_path: /Users/runner/hostedtoolcache/flutter
-    #   fail-fast: false
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            flutter_path: /opt/hostedtoolcache/flutter
+          - os: macos-latest
+            flutter_path: /Users/runner/hostedtoolcache/flutter
+      fail-fast: false
 
-    # steps:
-    #   - uses: actions/checkout@v2
-    #   - name: Cache Flutter
-    #     id: cache-flutter
-    #     uses: actions/cache@v2
-    #     with:
-    #       path: ${{ matrix.flutter_path }}
-    #       key: ${{ runner.os }}-flutter-install-cache-${{ env.flutter_version }}
-    #   - uses: subosito/flutter-action@v1
-    #     with:
-    #       channel: 'stable'
-    #       flutter_version: ${{ env.flutter_version }}
-    #   - name: Analyze and Test
-    #     run: |
-    #       ./tool/ci.sh
-    #   - name: Upload coverage to Codecov
-    #     uses: codecov/codecov-action@v1
-    #     with:
-    #       token: ${{ secrets.CODECOV_TOKEN }}
-    #       file: coverage/lcov.info
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Flutter
+        id: cache-flutter
+        uses: actions/cache@v2
+        with:
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter-install-cache-${{ env.flutter_version }}
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+          flutter_version: ${{ env.flutter_version }}
+      - name: dart-code-metrics
+        uses: dart-code-checker/dart-code-metrics-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Analyze and Test
+      #   run: |
+      #     ./tool/ci.sh
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v1
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: coverage/lcov.info
 
   # run linting and unit test
   flutter_test:
     name: Run flutter test and analyze
     runs-on: ${{ matrix.os }}
-    needs: setup
 
     strategy:
       matrix:
