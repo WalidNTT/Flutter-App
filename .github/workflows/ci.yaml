@@ -45,19 +45,8 @@ jobs:
 
   Code_quality:
     name: Dart-code-metrics-actions
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.os == 'ubuntu-latest' && 'docker/image' || null }}
+    runs-on: ubuntu-latest
     needs: setup
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        include:
-          - os: ubuntu-latest
-            flutter_path: /opt/hostedtoolcache/flutter
-          - os: macos-latest
-            flutter_path: /Users/runner/hostedtoolcache/flutter
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v2
@@ -65,7 +54,7 @@ jobs:
         id: cache-flutter
         uses: actions/cache@v2
         with:
-          path: ${{ matrix.flutter_path }}
+          path: /opt/hostedtoolcache/flutter
           key: ${{ runner.os }}-flutter-install-cache-${{ env.flutter_version }}
       - uses: subosito/flutter-action@v1
         with:
