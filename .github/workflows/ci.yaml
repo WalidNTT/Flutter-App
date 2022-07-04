@@ -6,8 +6,40 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  flutter_version: "3.0.3"
+  java_version: "12.x"
+
   # run jobs to test and build the android and ios app
 jobs:
+  # setup dependencies on flutter
+  setup:
+    name: Get flutter dependencies
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            flutter_path: /opt/hostedtoolcache/flutter
+          - os: macos-latest
+            flutter_path: /Users/runner/hostedtoolcache/flutter
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ matrix.flutter_path }}
+          key: ${{ runner.os }}-flutter
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: Install dependencies
+        run: flutter pub get
+
   # run linting and unit test
   flutter_test:
     name: Run flutter test and analyze
