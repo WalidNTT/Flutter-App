@@ -133,3 +133,19 @@ jobs:
     steps:
       - name: say hello
         run: echo "Hello World"
+
+  github_pages:
+    name: Publish to github page 
+    runs-on: ubuntu-latest
+    needs: [ build_appbundle, build_ios ]
+    steps:
+      - name: say hello
+        run: echo "Hello World"
+  
+  Deploy:
+    name: Upload beta
+    runs-on: ubuntu-latest
+    needs: [ setup, Code_quality, flutter_test, build_appbundle, build_ios, github_pages ]
+    steps:
+      - name: say hello
+        run: echo "Hello World"
