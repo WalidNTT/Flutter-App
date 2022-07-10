@@ -6,9 +6,7 @@ on:
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: [ main ]
-  
-  workflow_dispatch:
+    branches: [ main ]  
 
 env:
   flutter_version: "3.0.3"
@@ -209,7 +207,7 @@ jobs:
   github_pages:
     name: Publish to github page 
     runs-on: ubuntu-latest
-    needs: [ build_appbundle, build_ios ]
+    needs: [ build_android, build_ios ]
     steps:
       - name: say hello
         run: echo "Hello World"
