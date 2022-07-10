@@ -176,7 +176,7 @@ jobs:
       - name: Install Flutter dependencies
         run: flutter pub get
       - name: Build APK
-        run: flutter build apk --release --split-per-abi --base-href '/KONOMOMOBILE/'
+        run: flutter build apk --release --split-per-abi
       - name: pubilsh on Github pages
         uses: bluefireteam/flutter-gh-pages@v7
         with:
