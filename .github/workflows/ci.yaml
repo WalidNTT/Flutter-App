@@ -180,7 +180,7 @@ jobs:
       - name: pubilsh on Github pages
         uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /KONOMOMOBILE/
+          baseHref: /Flutter/
 
       # - name: Build APPBUNDLE
       #   run: flutter build appbundle --release
