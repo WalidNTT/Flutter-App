@@ -19,7 +19,7 @@ allprojects {
 }
 
 plugins {
-    `maven-publish`
+    'maven-publish'
 }
 publishing {
     repositories {
