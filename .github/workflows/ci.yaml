@@ -184,13 +184,13 @@ jobs:
           name: APK
           path: build/app/outputs/apk/release/*.apk
           retention-days: 3
-      - name: Deploy to github pages
-        uses: awb-pw/deploy-to-github-pages-action@1.1.1
-        env:
-          AUTHOR: anthonynyame
-          BUILD_PATH: build/app/outputs/apk/debug/*.apk
-          GITHUB_PAGE_NAME: anthonynyame.github.io
-          PA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Deploy to github pages
+      #   uses: awb-pw/deploy-to-github-pages-action@1.1.1
+      #   env:
+      #     AUTHOR: anthonynyame
+      #     BUILD_PATH: build/app/outputs/apk/debug/*.apk
+      #     GITHUB_PAGE_NAME: anthonynyame.github.io
+      #     PA_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: pubilsh on Github pages
       #   uses: bluefireteam/flutter-gh-pages@v7
       #   with:
