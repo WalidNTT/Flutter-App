@@ -42,16 +42,15 @@ publishing {
    }
 }
 
-maven {
-   url = project.findProperty("github_packages_registry_url")
-   credentials {
-      username = project.hasProperty("GH_USER_NAME") ? project.findProperty("MY_USERNAME") : System.getenv("MY_USERNAME")
-      password = project.hasProperty("GH_PACKAGES_TOKEN") ? project.findProperty("GH_PACKAGES_TOKEN") : System.getenv("GH_PACKAGES_TOKEN")
-   }
-}
-
 allprojects {
     repositories {
+        maven {
+            url = project.findProperty("github_packages_registry_url")
+            credentials {
+                username = project.hasProperty("GH_USER_NAME") ? project.findProperty("MY_USERNAME") : System.getenv("MY_USERNAME")
+                password = project.hasProperty("GH_PACKAGES_TOKEN") ? project.findProperty("GH_PACKAGES_TOKEN") : System.getenv("GH_PACKAGES_TOKEN")
+            }
+        }
         google()
         mavenCentral()
     }
