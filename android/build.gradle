@@ -11,8 +11,45 @@ buildscript {
     }
 }
 
+plugins {
+    id 'java-library'
+    id 'java'
+    id 'maven-publish'
+}
+
+version = '0.0.1-SNAPSHOT'
+
+java {
+   withSourcesJar()
+}
+
+publishing {
+   publications {
+      javaLibrary(MavenPublication) {
+         from project.components.java
+      }
+   }
+   repositories {
+      maven {
+        name = "GitHubPackages"
+        url = project.findProperty("github_packages_registry_url")
+        credentials {
+           username = System.getenv("MY_USERNAME")
+           password = System.getenv("GITHUB_TOKEN")
+        }
+      }
+   }
+}
+
 allprojects {
     repositories {
+        maven {
+            url = project.findProperty("github_packages_registry_url")
+            credentials {
+                username = project.hasProperty("GH_USER_NAME") ? project.findProperty("MY_USERNAME") : System.getenv("MY_USERNAME")
+                password = project.hasProperty("GH_PACKAGES_TOKEN") ? project.findProperty("GH_PACKAGES_TOKEN") : System.getenv("GH_PACKAGES_TOKEN")
+            }
+        }
         google()
         mavenCentral()
     }
@@ -24,8 +61,4 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
