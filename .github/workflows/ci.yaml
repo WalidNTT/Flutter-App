@@ -234,7 +234,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Publish to Github Packages
-        run: ./gradlew publish --stacktrace
+        run: |
+          cd android/
+          ./gradlew publish --stacktrace
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER_NAME: ${{ secrets.MY_USERNAME }}
