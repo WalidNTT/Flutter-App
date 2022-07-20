@@ -170,6 +170,7 @@ jobs:
         with:
           release_branches: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
       - name: Create Github Release
         uses: ncipollo/release-action@v1
         with:
@@ -178,6 +179,7 @@ jobs:
           body: ${{ steps.tag_version.outputs.changelog }}
           artifacts: "build/app/outputs/apk/debug/*.apk" # build/app/outputs/bundle/release/*.aab"
           token: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
       - name: Save APK to Artifacts
         uses: actions/upload-artifact@v2
         with:
