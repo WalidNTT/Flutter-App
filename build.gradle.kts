@@ -7,7 +7,7 @@
 
 
 plugins {
-    'maven-publish'
+    "maven-publish"
 }
 
 publishing {
