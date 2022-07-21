@@ -7,8 +7,7 @@
 
 
 plugins {
-    id 'java'
-    id 'maven-publish'
+    'maven-publish'
 }
 
 publishing {
