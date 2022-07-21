@@ -34,7 +34,7 @@ publishing {
         name = "GitHubPackages"
         url = project.findProperty("github_packages_registry_url")
         credentials {
-           username = System.getenv("MY_USERNAME")
+           username = System.getenv("GITHUB_ACTOR")
            password = System.getenv("GITHUB_TOKEN")
         }
       }
@@ -46,7 +46,7 @@ allprojects {
         maven {
             url = project.findProperty("github_packages_registry_url")
             credentials {
-                username = project.hasProperty("GH_USER_NAME") ? project.findProperty("MY_USERNAME") : System.getenv("MY_USERNAME")
+                username = project.hasProperty("GITHUB_ACTOR") ? project.findProperty("GITHUB_ACTOR") : System.getenv("GITHUB_ACTOR")
                 password = project.hasProperty("GH_PACKAGES_TOKEN") ? project.findProperty("GH_PACKAGES_TOKEN") : System.getenv("GH_PACKAGES_TOKEN")
             }
         }
