@@ -11,47 +11,8 @@ buildscript {
     }
 }
 
-plugins {
-    id 'java'
-    id 'maven-publish'
-}
-
-group 'com.company.project'
-archivesBaseName = 'library-name'
-version = '0.0.1-SNAPSHOT'
-
-java {
-   withSourcesJar()
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/anthonynyame/flutter-app")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-    publications {
-        gpr(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
-
 allprojects {
     repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/anthonynyame/flutter-app")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
         google()
         mavenCentral()
     }
