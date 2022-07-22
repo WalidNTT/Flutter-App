@@ -119,7 +119,7 @@ jobs:
   build_android:
     name: Build Android APK
     runs-on: ${{ matrix.os }}
-    needs: [setup, code_quality, flutter_test]
+    needs: [setup]
 
     strategy:
       matrix:
