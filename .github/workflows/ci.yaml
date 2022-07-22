@@ -289,8 +289,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
-      - run: apt-get update
-      - run: apt-get install -y python3 pip jq
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y python3 pip jq
       - name: Publish with python 
         run: |
           mv pipeline_scripts/*.py pipeline_scripts/*.jinja2 pipeline_scripts/*.sh .
