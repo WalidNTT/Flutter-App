@@ -297,7 +297,7 @@ jobs:
           python3 --version
           pip install jinja2 qrcode pillow
           mkdir public
-          python3 html_render.py https://app-capability.pages-tooling.dsp.intdigital.ee.co.uk/myee-app ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages $(cat $PROJECT_TOKEN)
+          python3 html_render.py https://app-capability.pages-tooling.dsp.intdigital.ee.co.uk/myee-app ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages $(cat $GITHUB_TOKEN)
           mv pipeline_scripts/*.css public/
           mv pipeline_scripts/*.png public/
           echo 0 > .job_status
