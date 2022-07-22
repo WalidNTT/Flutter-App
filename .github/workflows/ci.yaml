@@ -186,6 +186,7 @@ jobs:
           name: APK
           path: build/app/outputs/apk/debug/*.apk
           retention-days: 3
+          
       # - name: Deploy to github pages
       #   uses: awb-pw/deploy-to-github-pages-action@1.1.1
       #   env:
@@ -220,12 +221,12 @@ jobs:
   #     - name: say hello
   #       run: echo "Hello World"
 
-  publish:
-    runs-on: ubuntu-latest 
-    needs: [build_android]
-    permissions: 
-      contents: read
-      packages: write 
+  # publish:
+  #   runs-on: ubuntu-latest 
+  #   needs: [build_android]
+  #   permissions: 
+  #     contents: read
+  #     packages: write 
 
   #   # steps:
   #   #   - uses: actions/checkout@v2
@@ -302,7 +303,7 @@ jobs:
           python3 --version
           pip install jinja2 qrcode pillow
           mkdir public
-          python3 html_render.py https://anthonynyame.github.io/Flutter-App/ $GITHUB_API_URL/$GITHUB_REPOSITORY/packages ${{ env.PROJECT_TOKEN }}
+          python3 html_render.py https://anthonynyame.github.io/Flutter-App/ $GITHUB_API_URL/$GITHUB_REPOSITORY/$GITHUB_REF/packages ${{ env.PROJECT_TOKEN }}
           mv pipeline_scripts/*.css public/
           mv pipeline_scripts/*.png public/
           echo 0 > .job_status
