@@ -11,6 +11,34 @@ buildscript {
     }
 }
 
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+version = '0.0.1-SNAPSHOT'
+
+publishing {
+    repositories {
+        maven {
+            name = "Github"
+            url = uri("https://maven.pkg.github.com/anthonynyame/flutter-app")
+            credentials {
+                username = findProperty("github.username")
+                password = findProperty("github.token")
+            }
+        }
+    }
+    publications {
+        register("jar", MavenPublication) {
+            from(components["java"])
+            pom {
+                url.set("https://github.com/anthonynyame/flutter-app.git")
+            }
+        }
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -24,8 +52,4 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
