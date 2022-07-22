@@ -293,13 +293,14 @@ jobs:
       - run: sudo apt-get install -y python3 pip jq
       - name: Publish with python 
         env:
+          REGISTRY: ghcr.io
           PROJECT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mv pipeline_scripts/*.py pipeline_scripts/*.jinja2 pipeline_scripts/*.sh .
           python3 --version
           pip install jinja2 qrcode pillow
           mkdir public
-          python3 html_render.py https://anthonynyame.github.io/Flutter-App/ ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages $PROJECT_TOKEN
+          python3 html_render.py https://anthonynyame.github.io/Flutter-App/ $GITHUB_API_URL/$GITHUB_REPOSITORY/packages ${{ env.PROJECT_TOKEN }}
           mv pipeline_scripts/*.css public/
           mv pipeline_scripts/*.png public/
           echo 0 > .job_status
