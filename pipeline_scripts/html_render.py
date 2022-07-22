@@ -9,6 +9,10 @@ from urllib.error import HTTPError
 import json
 import qrcode
 
+# print (sys.argv[0])
+# print (sys.argv[1])
+# print (sys.argv[2])
+
 def url_request(url,token):
     print(url)
     try:
