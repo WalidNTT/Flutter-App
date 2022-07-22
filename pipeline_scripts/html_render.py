@@ -9,15 +9,15 @@ from urllib.error import HTTPError
 import json
 import qrcode
 
-# print (sys.argv[0])
-# print (sys.argv[1])
-# print (sys.argv[2])
+print (sys.argv[0])
+print (sys.argv[1])
+print (sys.argv[2])
 
 def url_request(url,token):
     print(url)
     try:
       request = urllib.request.Request(url)
-      request.add_header('PRIVATE-TOKEN',token)
+      request.add_header('GITHUB_TOKEN',token)
       content = urllib.request.urlopen(request).read().decode('utf-8')
       json_content = json.loads(content)
     except HTTPError:
